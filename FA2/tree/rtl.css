@@ -1,0 +1,32 @@
+ul.parent{
+direction: rtl;
+   list-style-image: none;
+   list-style: none;
+   margin: 0;
+   padding-right : 11px;
+   list-style-position: outside;
+   
+}
+ins{
+   background-image : url('rtl.gif') ;
+   background-repeat : no-repet; 
+   text-decoration: none;
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+}
+.insRootOpen{    
+    background-position: -72px 0px;
+}
+.insExpand{    
+    background-position: -90px 0px;
+}
+.insRootClose ins{
+    background-position: -54px 0px;
+}
+.insRootClose>li>ul{
+    display: none;   
+}
+.insNoChild ins{
+    background-position: -36px 0px;
+}

@@ -1,0 +1,66 @@
+<?php
+/* $Id: PDFPeriodStockTransListingPageHeader.inc 4307 2010-12-22 16:06:03Z tim_schofield $*/
+
+if ($PageNumber>1){
+	$pdf->newPage();
+}
+
+$YPos = $Page_Height - $Top_Margin - 50;
+
+$pdf->addJpegFromFile($_SESSION['LogoFile'],$Left_Margin,$YPos,0,50);
+
+$FontSize=15;
+
+$sql = "SELECT locations.loccode, locationname FROM locations WHERE loccode='".$_POST['StockLocation']."'";
+$resultStkLocs = DB_query($sql);
+$myloc=DB_fetch_array($resultStkLocs);
+
+$XPos = $Left_Margin+80;
+$YPos += 50;
+$pdf->addText($XPos, $YPos,$FontSize, $_SESSION['CompanyRecord']['coyname']);
+$FontSize=12;
+$pdf->addText($XPos, $YPos-20,$FontSize, 'Location : '.$myloc['locationname']);
+$YPos -=40;
+$pdf->addText($XPos, $YPos,$FontSize, $TransType . ' ' ._('dated from') . ' ' . $_POST['FromDate'] . ' ' . _('to') . ' ' . $_POST['ToDate']);
+
+
+
+$XPos = $Page_Width-$Right_Margin-50;
+$YPos -=30;
+$pdf->addText($XPos, $YPos+10,$FontSize, _('Page') . ': ' . $PageNumber);
+
+/*Now print out the company name and address */
+$XPos = $Left_Margin;
+$YPos -= $line_height;
+
+/*draw a square grid for entering line items */
+$pdf->line($XPos, $YPos,$Page_Width-$Right_Margin, $YPos);
+$pdf->line($Page_Width-$Right_Margin, $YPos,$Page_Width-$Right_Margin, $Bottom_Margin);
+$pdf->line($Page_Width-$Right_Margin, $Bottom_Margin,$XPos, $Bottom_Margin);
+$pdf->line($XPos, $Bottom_Margin,$XPos, $YPos);
+
+$pdf->line($Left_Margin+160, $YPos,$Left_Margin+160, $Bottom_Margin);
+$pdf->line($Left_Margin+200, $YPos,$Left_Margin+200, $Bottom_Margin);
+$pdf->line($Left_Margin+245, $YPos,$Left_Margin+245, $Bottom_Margin);
+$pdf->line($Left_Margin+400, $YPos,$Left_Margin+400, $Bottom_Margin);
+//$pdf->line($Left_Margin+454, $YPos,$Left_Margin+454, $Bottom_Margin);
+
+$YPos -= $line_height;
+/*Set up headings */
+$FontSize=8;
+
+$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,160,$FontSize,_('Stock Item'), 'left');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+162,$YPos,80,$FontSize,_('Reference'), 'left');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+202,$YPos,70,$FontSize,_('Trans Date'), 'left');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+270,$YPos,20,$FontSize,_('Lot'), 'right');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+310,$YPos,30,$FontSize,_('Qty'), 'right');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+326,$YPos,70,$FontSize,_('Total Qty'), 'right');
+//$LeftOvers = $pdf->addTextWrap($Left_Margin+382,$YPos,70,$FontSize,_('Location'), 'right');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,_('Reference'), 'right');
+$YPos-=$line_height;
+
+/*draw a line */
+$pdf->line($XPos, $YPos,$Page_Width-$Right_Margin, $YPos);
+
+$YPos -= ($line_height);
+?>

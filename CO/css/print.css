@@ -1,0 +1,31 @@
+/* CSS Document */
+.button {
+display:none;
+}
+.none{display:none}
+.heading {
+font-size:27px;
+font:"Times New Roman", Times, serif;
+font-weight:bold;
+}
+.logo {display:block;}
+.text {
+font-size:14px;
+font:"Times New Roman", Times, serif;
+font-weight:normal;
+}
+.tble {
+        background-color:#FFFFCC;
+
+        border:1px solid #000000;
+
+        -webkit-print-color-adjust: exact
+}
+.style4 {font-size: 10px}
+.style5 {
+	font-size: 12px;
+	font-weight: bold;
+}
+.ln { text-decoration:underline;}
+.refno{font-family:Stencil; font-size:x-large;}
+.none{display:none;}
